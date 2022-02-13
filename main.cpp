@@ -40,13 +40,45 @@ int main()
       tempchar = peak(inHead);
       Node* newtemp = new Node(tempchar);
       
-      if (tempchar != '^')
+      if (isdigit(tempchar) != 0)
 	{
 	  enqueue(outHead, newtemp);
 	}
       else if (tempchar == '^')
 	{
-	  push(stackHead, newtemp);
+	  if (stackHead != NULL)
+	    {
+	      char tempv = stackHead->getValue();
+	      Node* stackHeadTemp = new Node(tempv);
+	      if (tempv == '^')
+		{
+		  enqueue(outHead, stackHeadTemp);
+		  pop(stackHead);
+		  push(stackHead, newtemp);
+		}
+	    }
+	  else
+	    {
+	      push(stackHead, newtemp);
+	    }
+	}
+      else if (tempchar == '*' || tempchar == '/')
+	{
+	  if (stackHead != NULL)
+	    {
+	      char tempv = stackHead->getValue();
+	      Node* stackHeadTemp = new Node(tempv);
+	      if (tempv == '*' || tempv == '/' || tempv == '^')
+		{
+		  enqueue(outHead, stackHeadTemp);
+		  pop(stackHead);
+		  push(stackHead, newtemp);
+		}
+	    }
+	  else
+	    {
+	      push(stackHead, newtemp);
+	    }
 	}
       dequeue(inHead);
     }
