@@ -1,28 +1,74 @@
 #include "node.h"
 #include <iostream>
+#include <cstring>
+#include <cctype>
 
 using namespace std;
 
 int main()
 {
-  char value1 = '5';
-  Node* head = new Node(value1);
+  Node* inHead = NULL;
+  Node* stackHead = NULL;
+  Node* outHead = NULL;
+  char input[100];
+
+  cout << "Type input" << endl;
+  cin.getline(input, 100);
   
-  char value2 = '3';
-  Node* node1 = new Node(value2);
-  head->setNext(node1);
+  for (int i = 0; i < strlen(input); i++)
+    {
+      if (inHead != NULL)
+	{
+	  if (input[i] != ' ')
+	    {
+	      Node* tempNode = new Node(input[i]);
+	      enqueue(inHead, tempNode);
+	    }
+	}
+      else
+	{
+	  Node* tempNode = new Node(input[i]);
+	  inHead = tempNode;
+	}
+    }
+  print(inHead);
+  cout << "shunting yard" << endl;
+  //shunting yard algorithm
+  while (inHead != NULL)
+    {
+      char tempchar;
+      tempchar = peak(inHead);
+      Node* newtemp = new Node(tempchar);
+      
+      if (tempchar != '^')
+	{
+	  enqueue(outHead, newtemp);
+	}
+      else if (tempchar == '^')
+	{
+	  push(stackHead, newtemp);
+	}
+      dequeue(inHead);
+    }
+ 
+  cout << "output" << endl;
+  print(outHead);
 
-  char value3 = '7';
-  Node* node2 = new Node(value3);
-  node1->setNext(node2);
+  cout << "stack" << endl;
+  print(stackHead);
 
-  char value4 = '1';
-  Node* node3 = new Node(value4);
-  node2->setNext(node3);
+  while (stackHead != NULL)
+    {
+      char tempvalue = stackHead->getValue();
+      Node* tempstack = new Node(tempvalue);
+      enqueue(outHead, tempstack);
+      pop(stackHead);
+    }
+  cout << "output" << endl;
+  print(outHead);
 
-  node3->setNext(NULL);
-
-  print(head);
+  cout << "stack" << endl;
+  print(stackHead);
   
   return 0;
 }

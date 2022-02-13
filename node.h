@@ -21,10 +21,10 @@ class Node
   
 };
 
-void push(Node* &head, char tempValue);
+void push(Node* &head, Node* newNode);
 void pop(Node* &head);
 char peak(Node* head);
-void enqueue(Node* &head, Node* previous, Node* current);
+void enqueue(Node* &head, Node* newNode);
 void dequeue(Node* &head);
 void print(Node* head);
 

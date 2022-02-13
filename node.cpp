@@ -25,59 +25,101 @@ char Node::getValue()
   return value;
 }
 
-void push(Node* &head, char tempValue)
+//stack, new head
+void push(Node* &head, Node* newNode)
 {
-  Node* temp = head;
-  head = new Node(tempValue);
-  head->setNext(temp);
+  if (head != NULL)
+    {
+      Node* temp = head;
+      head = newNode;
+      head->setNext(temp);
+    }
+  else
+    {
+      head = newNode;
+    }
 }
 
+//stack, delete head
 void pop(Node* &head)
 {
-  Node* temp = head;
-  head = head->getNext();
-  delete temp;
+  if (head != NULL)
+    {
+      Node* temp = head;
+      head = head->getNext();
+      delete temp;
+    }
+  else
+    {
+      cout << "Nothing to delete" << endl;
+    }
 }
 
-char peak(Node* &head)
+//stack, print head value
+char peak(Node* head)
 {
   char tempValue;
   tempValue = head->getValue();
   return tempValue;
 }
 
-void enqueue(Node* &head, Node* previous, Node* current)
+//queue, add to end
+void enqueue(Node* &head, Node* newNode)
 {
-  if (current->getNext() == NULL)
+  Node* temp = newNode;
+  if (head != NULL)
     {
-      delete current;
+      Node* current = head;
+      Node* previous;
+      //Node* temp = newNode;
+      while (current->getNext() != NULL)
+	{
+	  previous = current;
+	  current = current->getNext();
+	}
+      current->setNext(temp);
     }
   else
     {
-      enqueue(head, current, current->getNext());
+      head = temp;
     }
 }
 
+//queue, delete head
 void dequeue(Node* &head)
 {
-  Node* temp = head;
-  head = head->getNext();
-  delete head;
+  if (head != NULL)
+    {
+      Node* temp = head;
+      head = head->getNext();
+      delete temp;
+    }
+  else
+    {
+      cout << "Nothing to delete" << endl;
+    }
 }
 
 void print(Node* head)
 {
-  Node* current = head;
-  Node* previous;
-  while (current->getNext() != NULL)
+  if (head != NULL)
     {
-      char temp = current->getValue();
-      cout << temp << " ";
-
-      previous = current;
-      current = current->getNext();
+      Node* current = head;
+      Node* previous;
+      while (current->getNext() != NULL)
+	{
+	  char temp = current->getValue();
+	  cout << temp << " ";
+	  
+	  previous = current;
+	  current = current->getNext();
+	}
+      cout << current->getValue() << endl;
     }
-  cout << current->getValue() << endl;
+  else
+    {
+      cout << "Nothing to print" << endl;
+    }
 }
 
 Node::~Node()
