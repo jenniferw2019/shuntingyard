@@ -52,9 +52,18 @@ int main()
 	      Node* stackHeadTemp = new Node(tempv);
 	      if (tempv == '^')
 		{
-		  enqueue(outHead, stackHeadTemp);
-		  pop(stackHead);
+		  while (tempv == '^')
+		    {
+		      enqueue(outHead, stackHeadTemp);
+		      pop(stackHead);
+		    }
 		  push(stackHead, newtemp);
+    
+		}
+	      else
+		{
+		  push(stackHead, newtemp);
+	
 		}
 	    }
 	  else
@@ -70,25 +79,65 @@ int main()
 	      Node* stackHeadTemp = new Node(tempv);
 	      if (tempv == '*' || tempv == '/' || tempv == '^')
 		{
-		  enqueue(outHead, stackHeadTemp);
-		  pop(stackHead);
+		  while (tempv == '*' || tempv == '/' || tempv == '^')
+		    {
+		      enqueue(outHead, stackHeadTemp);
+		      pop(stackHead);
+		    }
+		  push(stackHead, newtemp);
+		  
+		}
+	      else
+		{
 		  push(stackHead, newtemp);
 		}
 	    }
 	  else
 	    {
+	     
+	      push(stackHead, newtemp);
+	     
+	    }
+	  
+	  
+	}
+      else if (tempchar == '+' || tempchar == '-')
+	{
+	  if (stackHead == NULL)
+	    {
 	      push(stackHead, newtemp);
 	    }
+	  
+	  else 
+	    {
+	      
+	      while (stackHead != NULL)
+		{
+		  char tempv = stackHead->getValue();
+		  Node* stackHeadTemp = new Node(tempv);
+		  
+		  
+		  if (tempv == '+' || tempv == '-' || tempv == '*' || tempv == '/' || tempv == '^')
+		    {
+		      enqueue(outHead, stackHeadTemp);
+		      pop(stackHead);
+		    } 
+		}
+	      
+	      push(stackHead, newtemp);
+			
+	    }
+	  
 	}
-      dequeue(inHead);
+      dequeue(inHead);      
     }
- 
+  
   cout << "output" << endl;
   print(outHead);
 
   cout << "stack" << endl;
   print(stackHead);
-
+  
   while (stackHead != NULL)
     {
       char tempvalue = stackHead->getValue();
