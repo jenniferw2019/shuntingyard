@@ -46,6 +46,29 @@ int main()
 	}
       else if (tempchar == '^')
 	{
+	  if (stackHead == NULL)
+	    {
+	      push(stackHead, newtemp);
+	    }
+	  else
+	    {
+	      while (stackHead != NULL)
+		{
+		  char tempv = stackHead->getValue();
+		  Node* stackHeadTemp = new Node(tempv);
+		  if (tempv == '^')
+		    {
+		      enqueue(outHead, stackHeadTemp);
+		      pop(stackHead);
+		    }
+		  else if (tempv == '+' || tempv == '-' || tempv == '*' || tempv == '/' || tempv == '(')
+		    {
+		      break;
+		    }
+		}
+	      push(stackHead, newtemp);
+	    }
+	  /*
 	  if (stackHead != NULL)
 	    {
 	      char tempv = stackHead->getValue();
@@ -70,35 +93,32 @@ int main()
 	    {
 	      push(stackHead, newtemp);
 	    }
+	  */
 	}
       else if (tempchar == '*' || tempchar == '/')
 	{
-	  if (stackHead != NULL)
+	  if (stackHead == NULL)
 	    {
-	      char tempv = stackHead->getValue();
-	      Node* stackHeadTemp = new Node(tempv);
-	      if (tempv == '*' || tempv == '/' || tempv == '^')
+	      push(stackHead, newtemp);
+	    }
+	  else
+	    {
+	      while (stackHead != NULL)
 		{
-		  while (tempv == '*' || tempv == '/' || tempv == '^')
+		  char tempv = stackHead->getValue();
+		  Node* stackHeadTemp = new Node(tempv);
+		  if (tempv == '*' || tempv == '/' || tempv == '^')
 		    {
 		      enqueue(outHead, stackHeadTemp);
 		      pop(stackHead);
 		    }
-		  push(stackHead, newtemp);
-		  
+		  else if (tempv == '+' || tempv == '-' || tempv == '(')
+		    {
+		      break;
+		    }
 		}
-	      else
-		{
-		  push(stackHead, newtemp);
-		}
-	    }
-	  else
-	    {
-	     
 	      push(stackHead, newtemp);
-	     
-	    }
-	  
+	    }	  
 	  
 	}
       else if (tempchar == '+' || tempchar == '-')
@@ -121,13 +141,47 @@ int main()
 		    {
 		      enqueue(outHead, stackHeadTemp);
 		      pop(stackHead);
-		    } 
+		    }
+		  else if (tempv == '(')
+		    {
+		      break;
+		    }
 		}
 	      
 	      push(stackHead, newtemp);
 			
 	    }
 	  
+	}
+      else if (tempchar == '(')
+	{
+	  push(stackHead, newtemp);
+	}
+      else if (tempchar == ')')
+	{
+	  if (stackHead->getValue() == '(')
+	    {
+	      pop(stackHead);
+	    }
+	  else
+	    {
+	      while (stackHead != NULL)
+		{
+		  char tempv = stackHead->getValue();
+		  Node* stackHeadTemp = new Node(tempv);
+
+		  if (tempv != '(')
+		    {
+		      enqueue(outHead, stackHeadTemp);
+		      pop(stackHead);
+		    }
+		  else
+		    {
+		      break;
+		    }
+		}
+	      pop(stackHead);
+	    }
 	}
       dequeue(inHead);      
     }
