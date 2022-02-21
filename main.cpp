@@ -220,6 +220,7 @@ int main()
 	  TreeNode* tempNode = new TreeNode(tempNodeValue);
 	  TreeStack* tempStack = new TreeStack(tempNode);
 	  pushTree(treeStackHead, tempStack);
+	  
 	}
       else if (tempNodeValue == '+' || tempNodeValue == '-' || tempNodeValue == '*' || tempNodeValue == '/' || tempNodeValue == '^')
 	{
@@ -228,14 +229,26 @@ int main()
 	  TreeStack* temp2 = treeStackHead;
 	  popTree(treeStackHead);
 
-	  TreeNode* templeft = temp1->getTreeStackVal();
-	  TreeNode* tempright = temp2->getTreeStackVal();
+	  TreeNode* templeft = temp2->getTreeStackVal();
+	  TreeNode* tempright = temp1->getTreeStackVal();
+	  
+	  
+
+	  TreeNode* tempNode = new TreeNode(tempNodeValue);
+	  treeNodeHead = tempNode;
+	  
 	  TreeNode* newtreeNode = makeTree(treeNodeHead, templeft, tempright);
 	  TreeStack* newtreeStack = new TreeStack(newtreeNode);
-	  pushTree(treeStackHead, newtreeStack);
-	}  
+	  pushTree(treeStackHead, newtreeStack);	  
+	}
+      dequeue(outHead);
       
     }
+
+  cout << "print tree post" << endl;
+  printTreePost(treeNodeHead);
+  cout << endl;
+  
   return 0;
 }
 

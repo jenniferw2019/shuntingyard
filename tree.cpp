@@ -68,7 +68,7 @@ void popTree(TreeStack* &tsHead)
     {
       TreeStack* temp = tsHead;
       tsHead = tsHead->getNext();
-      delete temp;
+      //delete temp;
     }
   else
     {
@@ -99,6 +99,15 @@ TreeNode* makeTree(TreeNode* &head, TreeNode* left, TreeNode* right)
       head->setRight(right);
     }
 
-  return head;
-  
+  return head;  
+}
+
+void printTreePost(TreeNode* head)
+{
+  if (head != NULL)
+    {
+      printTreePost(head->getLeft());
+      printTreePost(head->getRight());
+      cout << head->getTreeNodeVal() << " ";
+    }
 }

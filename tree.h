@@ -42,5 +42,5 @@ private:
 TreeNode*  makeTree(TreeNode* &head, TreeNode* left, TreeNode* right);
 void popTree(TreeStack* &tsHead);
 void pushTree(TreeStack* &tsHead, TreeStack* newtsStack);
-
+void printTreePost(TreeNode* head);
 #endif
