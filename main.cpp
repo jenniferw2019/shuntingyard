@@ -1,4 +1,5 @@
 #include "node.h"
+#include "tree.h"
 #include <iostream>
 #include <cstring>
 #include <cctype>
@@ -10,6 +11,7 @@ int main()
   Node* inHead = NULL;
   Node* stackHead = NULL;
   Node* outHead = NULL;
+  TreeStack* treeStackHead = NULL;
   char input[100];
 
   cout << "Type input" << endl;
@@ -204,6 +206,36 @@ int main()
 
   cout << "stack" << endl;
   print(stackHead);
+
+
+  // binary tree
+
+  TreeNode* treeNodeHead = NULL;
   
+  while (outHead != NULL)
+    {
+      char tempNodeValue = peak(outHead);
+      if (isdigit(tempNodeValue) != 0)
+	{ 
+	  TreeNode* tempNode = new TreeNode(tempNodeValue);
+	  TreeStack* tempStack = new TreeStack(tempNode);
+	  pushTree(treeStackHead, tempStack);
+	}
+      else if (tempNodeValue == '+' || tempNodeValue == '-' || tempNodeValue == '*' || tempNodeValue == '/' || tempNodeValue == '^')
+	{
+	  TreeStack* temp1 = treeStackHead;
+	  popTree(treeStackHead);
+	  TreeStack* temp2 = treeStackHead;
+	  popTree(treeStackHead);
+
+	  TreeNode* templeft = temp1->getTreeStackVal();
+	  TreeNode* tempright = temp2->getTreeStackVal();
+	  TreeNode* newtreeNode = makeTree(treeNodeHead, templeft, tempright);
+	  TreeStack* newtreeStack = new TreeStack(newtreeNode);
+	  pushTree(treeStackHead, newtreeStack);
+	}  
+      
+    }
   return 0;
 }
+
