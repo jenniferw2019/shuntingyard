@@ -111,3 +111,13 @@ void printTreePost(TreeNode* head)
       cout << head->getTreeNodeVal() << " ";
     }
 }
+
+void printTreePrefix(TreeNode* head)
+{
+  if (head != NULL)
+    {
+      cout << head->getTreeNodeVal() << " ";
+      printTreePrefix(head->getLeft());
+      printTreePrefix(head->getRight());
+    }
+}

@@ -33,8 +33,8 @@ int main()
 	  inHead = tempNode;
 	}
     }
-  print(inHead);
-  cout << "shunting yard" << endl;
+  //print(inHead);
+  //cout << "shunting yard" << endl;
   //shunting yard algorithm
   while (inHead != NULL)
     {
@@ -188,11 +188,11 @@ int main()
       dequeue(inHead);      
     }
   
-  cout << "output" << endl;
-  print(outHead);
+  //cout << "output" << endl;
+  //print(outHead);
 
-  cout << "stack" << endl;
-  print(stackHead);
+  //cout << "stack" << endl;
+  //print(stackHead);
   
   while (stackHead != NULL)
     {
@@ -248,7 +248,10 @@ int main()
   cout << "print tree post" << endl;
   printTreePost(treeNodeHead);
   cout << endl;
-  
+
+  cout << "print tree prefix" << endl;
+  printTreePrefix(treeNodeHead);
+  cout << endl;
   return 0;
 }
 
