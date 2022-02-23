@@ -1,3 +1,4 @@
+//cpp file for tree
 #include <iostream>
 #include <cstring>
 #include "tree.h"
@@ -62,6 +63,7 @@ TreeNode* TreeStack::getTreeStackVal()
 
 TreeStack::~TreeStack() {}
 
+//tree stack delete head
 void popTree(TreeStack* &tsHead)
 {
   if ( tsHead!= NULL)
@@ -76,6 +78,7 @@ void popTree(TreeStack* &tsHead)
     }
 }
 
+//tree stack new head
 void pushTree(TreeStack* &tsHead, TreeStack* newtsStack)
 {
   if (tsHead != NULL)
@@ -91,6 +94,7 @@ void pushTree(TreeStack* &tsHead, TreeStack* newtsStack)
   
 }
 
+//tree node set left and right child
 TreeNode* makeTree(TreeNode* &head, TreeNode* left, TreeNode* right)
 {
   if (head != NULL)
@@ -102,6 +106,7 @@ TreeNode* makeTree(TreeNode* &head, TreeNode* left, TreeNode* right)
   return head;  
 }
 
+//print tree postfix
 void printTreePost(TreeNode* head)
 {
   if (head != NULL)
@@ -112,6 +117,7 @@ void printTreePost(TreeNode* head)
     }
 }
 
+//print tree prefix
 void printTreePrefix(TreeNode* head)
 {
   if (head != NULL)
@@ -119,5 +125,23 @@ void printTreePrefix(TreeNode* head)
       cout << head->getTreeNodeVal() << " ";
       printTreePrefix(head->getLeft());
       printTreePrefix(head->getRight());
+    }
+}
+
+void printTreeInfix(TreeNode* head)
+{
+  if (head != NULL)
+    {
+      if (isdigit(head->getTreeNodeVal()) == 0)
+	{
+	  cout << "( ";
+	}
+      printTreeInfix(head->getLeft());
+      cout << head->getTreeNodeVal() << " ";
+      printTreeInfix(head->getRight());
+      if (isdigit(head->getTreeNodeVal()) == 0)
+	{
+	  cout << " )";
+	}
     }
 }

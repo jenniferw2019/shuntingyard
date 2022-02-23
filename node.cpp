@@ -1,3 +1,4 @@
+//cpp file for node
 #include "node.h"
 #include <iostream>
 #include <cstring>
@@ -71,7 +72,6 @@ void enqueue(Node* &head, Node* newNode)
     {
       Node* current = head;
       Node* previous;
-      //Node* temp = newNode;
       while (current->getNext() != NULL)
 	{
 	  previous = current;
@@ -100,6 +100,7 @@ void dequeue(Node* &head)
     }
 }
 
+//print stack and queue
 void print(Node* head)
 {
   if (head != NULL)
