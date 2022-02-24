@@ -219,17 +219,23 @@ int main()
 	  TreeStack* temp2 = treeStackHead;
 	  popTree(treeStackHead);
 
-	  TreeNode* templeft = temp2->getTreeStackVal();
-	  TreeNode* tempright = temp1->getTreeStackVal();
-	  
-	  
-
-	  TreeNode* tempNode = new TreeNode(tempNodeValue);
-	  treeNodeHead = tempNode;
-	  
-	  TreeNode* newtreeNode = makeTree(treeNodeHead, templeft, tempright);
-	  TreeStack* newtreeStack = new TreeStack(newtreeNode);
-	  pushTree(treeStackHead, newtreeStack);	  
+	  if (temp2 == NULL || temp1 == NULL)
+	    {
+	      cout << "Error in infix input expression" << endl;
+	      return 1;
+	    }
+	  else
+	    {
+	      TreeNode* templeft = temp2->getTreeStackVal();
+	      TreeNode* tempright = temp1->getTreeStackVal();
+	    
+	      TreeNode* tempNode = new TreeNode(tempNodeValue);
+	      treeNodeHead = tempNode;
+	      
+	      TreeNode* newtreeNode = makeTree(treeNodeHead, templeft, tempright);
+	      TreeStack* newtreeStack = new TreeStack(newtreeNode);
+	      pushTree(treeStackHead, newtreeStack);
+	    }
 	}
       dequeue(outHead);
       
